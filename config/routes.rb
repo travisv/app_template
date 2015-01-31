@@ -1,16 +1,7 @@
 Rails.application.routes.draw do
-  get 'clients/new'
-
-  get 'clients/show'
-
-  get 'clients/index'
-
-  get 'clients/create'
-
-  get 'clients/edit'
-
-  patch 'clients/update'
-
+  root 'clients#new'
+  get 'add_client'    => 'clients#new'
+  get 'all_clients'   => 'clients#index'
   resources :clients
 
 
