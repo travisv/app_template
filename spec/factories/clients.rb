@@ -2,7 +2,7 @@
 
 FactoryGirl.define do
   factory :client do
-    name "MyString"
-    email "MyString"
+    name { Faker::Name.name }
+    email { Faker::Internet.email }
   end
 end
