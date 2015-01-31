@@ -21,10 +21,9 @@ describe Homevisit do
     homevisit.valid?
     expect(homevisit.errors[:client_id]).to include("can't be blank")
   end
-  it "has a valid date format"
-  xit "does not allow duplicate homevisits per client" do
-    create(:homevisit, date_of_departure: "2000-1-1", date_of_return: 2000-1-3, client_id: 1)
-    duplicate_hv = build(:homevisit, date_of_departure: "2000-1-1", date_of_return: 2000-1-3, client_id: 1)
+  it "does not allow duplicate homevisits per client" do
+    homevisit = create(:homevisit)
+    duplicate_hv = homevisit.dup
     duplicate_hv.valid?
     expect(duplicate_hv).not_to be_valid
   end
