@@ -22,3 +22,4 @@ describe Client do
 		expect(duplicate.errors[:email]).to include("has already been taken")
 	end
 end
+ 
