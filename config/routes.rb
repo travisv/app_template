@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   get 'add_client'    => 'clients#new'
   get 'all_clients'   => 'clients#index'
   resources :clients
+  resources :homevisits
 
 
   # The priority is based upon order of creation: first created -> highest priority.

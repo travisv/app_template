@@ -5,5 +5,10 @@ FactoryGirl.define do
     date_of_departure { Faker::Date.between(100.days.ago, Date.today) }
     date_of_return { Faker::Date.between(100.days.ago, Date.today) }
     client_id { Faker::Number.digit }
+
+    factory :invalid_homevisit do
+    	client_id nil
+    	id nil
+    end
   end
 end
