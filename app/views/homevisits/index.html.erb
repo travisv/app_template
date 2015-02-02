@@ -1,0 +1,7 @@
+<% @homevisits.each do |h| %>
+<% @client.each do |c| %>
+  <%= c.name %>
+  <%= h.date_of_departure %>
+  <%= h.date_of_return %>
+<% end %>
+<% end %>

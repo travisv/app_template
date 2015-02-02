@@ -1,0 +1,2 @@
+<%= form_for([@client, @homevisit]) do |f| %> <%= f.label :client, @client.name %>: <%= f.label :Departure_date %> <%= f.date_field :date_of_departure %> <%= f.label :Return_date %> <%= f.date_field :date_of_return %> <%= f.submit "Create Homevisit", class: "btn btn-sm btn-danger" %> <% end %> >
+</div>

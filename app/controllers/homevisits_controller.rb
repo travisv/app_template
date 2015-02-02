@@ -9,6 +9,7 @@ class HomevisitsController < ApplicationController
 	end
 
 	def index
+		@client = Client.all
 		@homevisits = Homevisit.all
 	end
 

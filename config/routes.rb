@@ -2,7 +2,9 @@ Rails.application.routes.draw do
   root 'clients#new'
   get 'add_client'    => 'clients#new'
   get 'all_clients'   => 'clients#index'
-  resources :clients
+  resources :clients do
+    resources :homevisits
+  end
   resources :homevisits
 
 

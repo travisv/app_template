@@ -64,6 +64,11 @@ RSpec.describe HomevisitsController, :type => :controller do
         get :show, id: homevisit
         expect(response).to render_template :show
       end
+      it "belongs to the correct client" do
+        homevisit = create(:homevisit, client_id: 2)
+        post :create, homevisit: attributes_for(:homevisit) 
+        expect(homevisit.client_id).to be 2
+      end
     end
     context "with invalid attributes" do
       it "does not save the new homevisit in the database" do
