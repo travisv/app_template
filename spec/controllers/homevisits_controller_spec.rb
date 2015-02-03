@@ -14,14 +14,17 @@ RSpec.describe HomevisitsController, :type => :controller do
   end
   
   describe "GET #show" do
+      before do
+       @client = Client.create(id: 1, name: "travis", email: 'user@example.com')
+      end
     it "assigns the requested homevisit to @homevisit" do
-      homevisit = create(:homevisit)
-      get :show, id: homevisit
-      expect(assigns(:homevisit)).to eq homevisit
+      homevisit = create(:homevisit, client_id: 1)
+      get :show, id: homevisit, client_id: @client
+      expect(homevisit.client_id).to eq 1
     end
     it "renders the :show template" do
       homevisit = create(:homevisit)
-      get :show, id: homevisit
+      get :show, id: homevisit,  client_id: @client
       expect(response).to render_template :show
     end
   end
@@ -53,33 +56,36 @@ RSpec.describe HomevisitsController, :type => :controller do
   end
   
   describe "POST #create" do
+      before do
+       @client = Client.create(id: 1, name: "travis", email: 'user@example.com')
+      end
     context "with valid attributes" do
       it "saves the new homevisit in the database" do
         expect{
-          post :create, homevisit: attributes_for(:homevisit)
+          post :create, client_id: @client, homevisit: attributes_for(:homevisit)
         }.to change(Homevisit, :count).by(1)
       end
       it "redirects to the homevisits#show" do
         homevisit = create(:homevisit)
-        get :show, id: homevisit
+        get :show, client_id: @client, id: homevisit
         expect(response).to render_template :show
       end
       it "belongs to the correct client" do
         homevisit = create(:homevisit, client_id: 2)
-        post :create, homevisit: attributes_for(:homevisit) 
+        post :create, client_id: @client, homevisit: attributes_for(:homevisit) 
         expect(homevisit.client_id).to be 2
       end
     end
     context "with invalid attributes" do
       it "does not save the new homevisit in the database" do
         expect{
-          post :create, 
+          post :create, client_id: @client, 
             homevisit: attributes_for(:invalid_homevisit)
           expect(response).to render_template :new
         }.not_to change(Homevisit, :count)
       end
       it "re-renders the :new template" do
-        post :create,
+        post :create, client_id: @client,
           homevisit: attributes_for(:invalid_homevisit)
         expect(response).to render_template :new
       end
@@ -88,11 +94,12 @@ RSpec.describe HomevisitsController, :type => :controller do
 
   describe "PATCH #update" do
     before :each do
+      @client = Client.create(id: 1, name: "travis", email: 'user@example.com')
       @homevisit = create(:homevisit, date_of_departure: '2014-1-1')
     end
     context "with valid attributes" do
       it "locates the requested @homevisit" do
-        patch :update, id: @homevisit, homevisit: attributes_for(:homevisit)
+        patch :update, id: @homevisit, client_id: @client, homevisit: attributes_for(:homevisit)
         expect(assigns(:homevisit)).to eq(@homevisit)
       end
       it "redirects to the contact" do

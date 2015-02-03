@@ -1,16 +1,18 @@
 class HomevisitsController < ApplicationController
 
 	def new
+		@client = Client.find(params[:client_id])
 		@homevisit = Homevisit.new
 	end
 
 	def show
+		@client = Client.find(params[:client_id])
 		@homevisit = Homevisit.find(params[:id])
 	end
 
 	def index
 		@client = Client.all
-		@homevisits = Homevisit.all
+		@homevisits = Homevisit.order(:date_of_departure)
 	end
 
 	def edit
@@ -18,8 +20,13 @@ class HomevisitsController < ApplicationController
 	end
 
 	def create
-		@homevisit = Homevisit.new(homevisit_params)
-		render 'new' unless @homevisit.save
+		@client = Client.find(params[:client_id])
+		@homevisit = @client.homevisits.new(homevisit_params)
+		if @homevisit.save
+			redirect_to homevisits_path
+		else
+			render 'new'
+		end
 	end
 
 	def update

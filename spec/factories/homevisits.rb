@@ -7,8 +7,7 @@ FactoryGirl.define do
     client_id { Faker::Number.digit }
 
     factory :invalid_homevisit do
-    	client_id nil
-    	id nil
+    	date_of_departure nil
     end
   end
 end
