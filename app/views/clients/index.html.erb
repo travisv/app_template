@@ -1,5 +1,5 @@
 <% provide(:title, 'Clients') %>
 
-<% @clients.each do |u| %>
-  <%= u.name %>
+<% @clients.each do |client| %>
+  <%= link_to client.name, client_path(client.id) %>
 <% end %>

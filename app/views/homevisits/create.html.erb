@@ -1,0 +1,16 @@
+<% provide(:title, 'Create Homevisit') %>
+<h1>Add Homevisit</h1>
+
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <%= form_for([@client, @homevisit]) do |f| %>
+      <%= f.label :Departure_date %>
+      <%= f.date_field :date_of_departure %>
+
+      <%= f.label :Departure_return %>
+      <%= f.date_field :date_of_return %>
+
+      <%= f.submit "Create Homevisit", class: "btn btn-primary" %>
+    <% end %>
+  </div>
+</div>
